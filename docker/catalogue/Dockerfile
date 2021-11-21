@@ -5,7 +5,9 @@ WORKDIR /go/src/github.com/microservices-demo/catalogue
 
 #RUN apt-get update
 #RUN apt-get install --reinstall ca-certificates
-RUN apt update && apt install ca-certificates libgnutls30 -y
+#RUN apt update && apt install ca-certificates libgnutls30 -y
+RUN apt-get update && apt-get install datadog-agent
+RUN apt-get --allow-releaseinfo-change update && apt upgrade -y
 
 RUN go get -u github.com/FiloSottile/gvt
 RUN gvt restore && \

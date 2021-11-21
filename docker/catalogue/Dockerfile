@@ -3,6 +3,10 @@ FROM golang:1.7
 COPY . /go/src/github.com/microservices-demo/catalogue
 WORKDIR /go/src/github.com/microservices-demo/catalogue
 
+RUN apt-get update
+RUN apt-get install apt-transport-https ca-certificates -y 
+RUN update-ca-certificates
+
 RUN go get -u github.com/FiloSottile/gvt
 RUN gvt restore && \
     CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o /app github.com/microservices-demo/catalogue/cmd/cataloguesvc
